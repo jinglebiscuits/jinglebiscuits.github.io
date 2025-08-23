@@ -167,12 +167,13 @@
   @media (max-width: 767px) {
     body {
       background-attachment: scroll; /* Better performance on mobile */
-      background-position: center;
+      background-position: center right; /* Show the right portion of the image */
+      background-size: cover; /* Ensure full coverage */
     }
     
     .content-container {
-      /* Better gradient for mobile portrait mode - covers more of the screen */
-      background: linear-gradient(to right, var(--overlay) 0%, var(--overlay) 85%, rgba(255, 253, 247, 0.3) 100%);
+      /* Simple transparency overlay for mobile */
+      background: var(--overlay);
       padding: 1.5rem 1rem;
     }
     
