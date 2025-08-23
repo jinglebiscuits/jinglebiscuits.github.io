@@ -2,130 +2,207 @@
 <meta name="robots" content="noindex" />
 
 <style>
-  /* --- quick, mobile-first styling --- */
+  /* --- Full-page background layout with left-positioned content --- */
   :root {
     --accent: #ff7b00;
-    /* button / highlight colour */
     --text: #333333;
     --bg: #fffdf7;
-    --card: #ffffff;
+    --card: rgba(255, 255, 255, 0.95);
+    --overlay: rgba(255, 253, 247, 0.85);
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   body {
     margin: 0;
     font-family: "Fredoka", sans-serif;
-    background: var(--bg);
     color: var(--text);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 1rem 4rem;
+    min-height: 100vh;
+    
+    /* Full page background image - replace with your image URL */
+    background-image: url('/images/tumnus-bday-background.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
   }
 
-  img.hero {
+  .content-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 1rem;
+    
+    /* Semi-transparent overlay for text readability */
+    background: linear-gradient(to right, var(--overlay) 0%, var(--overlay) 70%, transparent 100%);
+  }
+
+  .content {
     width: 100%;
-    max-width: 450px;
-    border-radius: 12px;
-    margin: 1.5rem 0;
+    max-width: 500px;
   }
 
   h1 {
-    font-size: 2.2rem;
-    margin: 0.5rem 0 0;
-    text-align: center;
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 400;
-    margin: 0.3rem 0 1.4rem;
-    text-align: center;
+    margin: 0 0 2rem 0;
+    opacity: 0.8;
   }
 
   .card {
-    width: 100%;
-    max-width: 480px;
     background: var(--card);
-    border-radius: 12px;
-    padding: 1.4rem 1.6rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, .07);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .row {
     display: flex;
-    gap: 0.7rem;
-    margin: 0.4rem 0;
+    gap: 0.8rem;
+    margin: 0.6rem 0;
+    align-items: flex-start;
   }
 
   .row svg {
     flex-shrink: 0;
+    margin-top: 2px;
   }
 
   a.btn {
     display: inline-block;
-    margin-top: 1.2rem;
-    padding: 0.75rem 1.2rem;
+    margin: 1.5rem 0.8rem 0.5rem 0;
+    padding: 0.9rem 1.5rem;
     background: var(--accent);
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
-    transition: background .2s;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
   }
 
   a.btn:hover {
     background: #e06e00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 123, 0, 0.4);
   }
 
   footer {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-top: 2rem;
-    opacity: .6;
-    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Desktop: Position content on left 2/3 of screen */
+  @media (min-width: 768px) {
+    .content-container {
+      padding: 2rem 4rem;
+      background: linear-gradient(to right, var(--overlay) 0%, var(--overlay) 65%, transparent 100%);
+    }
+    
+    .content {
+      max-width: 600px;
+      width: 66.67%; /* 2/3 of the screen */
+    }
+    
+    h1 {
+      font-size: 3rem;
+    }
+    
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Large desktop: Even more spacing */
+  @media (min-width: 1200px) {
+    .content-container {
+      padding: 3rem 6rem;
+    }
+    
+    .content {
+      max-width: 650px;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    body {
+      background-attachment: scroll; /* Better performance on mobile */
+      background-position: center;
+    }
+    
+    .content-container {
+      background: var(--overlay);
+      padding: 1.5rem 1rem;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    .card {
+      padding: 1.5rem;
+    }
+    
+    a.btn {
+      display: block;
+      text-align: center;
+      margin: 1rem 0 0.5rem 0;
+    }
   }
 </style>
 
-<!--  Top photo  -->
-<img src="https://www.cdc.gov/child-development/media/images/young-boy-smiling-with-grey-shirt.png" class="hero"
-  alt="Tumnus smiling" />
+<div class="content-container">
+  <div class="content">
+    <h1>Tumnus is turning&nbsp;3!</h1>
+    <h2>Saturday • 20&nbsp;September • 9 – 11 AM</h2>
 
-<h1>Tumnus is turning&nbsp;3!</h1>
-<h2>Saturday • 20&nbsp;September • 9 – 11 AM</h2>
+    <div class="card">
 
-<div class="card">
+      <!--  Address  -->
+      <div class="row">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 ...Z" fill="#ff7b00" />
+        </svg>
+        <div>
+          <strong>Our house</strong><br />
+          4232&nbsp;Overlook&nbsp;Dr
+        </div>
+      </div>
 
-  <!--  Address  -->
-  <div class="row">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2C8.13 2 5 5.13 ...Z" fill="#ff7b00" />
-    </svg>
-    <div>
-      <strong>Our house</strong><br />
-      999&nbsp;Overlook&nbsp;Dr
-    </div>
-  </div>
+      <!--  Gift note  -->
+      <div class="row" style="margin-top:0.8rem;">
+        <span>🎁 No&nbsp;gifts please!</span>
+      </div>
 
-  <!--  Gift note  -->
-  <div class="row" style="margin-top:0.8rem;">
-    <span>🎁 No&nbsp;gifts please – your presence is the present!</span>
-  </div>
+      <!--  RSVP button  -->
+      <a class="btn"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
+        target="_blank">
+        RSVP via Google&nbsp;Form
+      </a>
 
-  <!--  RSVP button  -->
-  <a class="btn"
-    href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
-    target="_blank">
-    RSVP via Google&nbsp;Form
-  </a>
+      <!--  Add-to-calendar button  -->
+      <a id="addCalBtn" class="btn" href="#" style="background:#4e8cff;">Add&nbsp;to&nbsp;Calendar</a>
 
-  <!--  Add-to-calendar button  -->
-  <a id="addCalBtn" class="btn" href="#" style="background:#4e8cff; margin-left:.6rem;">Add&nbsp;to&nbsp;Calendar</a>
+      <script>
+        const googleURL =
+          'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
 
-  <script>
-    const googleURL =
-      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
-
-    // ICS content generated dynamically - no separate file needed!
-    const icsContent = `BEGIN:VCALENDAR
+        // ICS content generated dynamically - no separate file needed!
+        const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//jinglebiscuits//tumnus-bday//EN
 CALSCALE:GREGORIAN
@@ -141,30 +218,32 @@ LOCATION:4232 Overlook Drive South 35222
 END:VEVENT
 END:VCALENDAR`;
 
-    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-    window.addEventListener('DOMContentLoaded', function () {
-      const btn = document.getElementById('addCalBtn');
-      if (!btn) return;
+        window.addEventListener('DOMContentLoaded', function () {
+          const btn = document.getElementById('addCalBtn');
+          if (!btn) return;
 
-      if (isiOS) {
-        // Create data URL for iOS - bypasses server MIME type issues
-        const blob = new Blob([icsContent], { type: 'text/calendar' });
-        const dataURL = URL.createObjectURL(blob);
-        btn.href = dataURL;
-        btn.download = 'tumnus-bday.ics';
-        btn.target = '_blank';
-        btn.rel = 'noopener';
-      } else {
-        btn.href = googleURL;
-        btn.target = '_blank';
-        btn.rel = 'noopener';
-      }
-    });
-  </script>
+          if (isiOS) {
+            // Create data URL for iOS - bypasses server MIME type issues
+            const blob = new Blob([icsContent], { type: 'text/calendar' });
+            const dataURL = URL.createObjectURL(blob);
+            btn.href = dataURL;
+            btn.download = 'tumnus-bday.ics';
+            btn.target = '_blank';
+            btn.rel = 'noopener';
+          } else {
+            btn.href = googleURL;
+            btn.target = '_blank';
+            btn.rel = 'noopener';
+          }
+        });
+      </script>
 
+    </div>
+
+    <footer>
+      Questions? Text Kim & Scott
+    </footer>
+  </div>
 </div>
-
-<footer>
-  Questions? Text Kim & Scott
-</footer>
