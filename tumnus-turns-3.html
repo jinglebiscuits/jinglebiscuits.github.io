@@ -57,45 +57,61 @@
     opacity: 0.8;
   }
 
-  .card {
-    background: var(--card);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  .details {
+    margin: 2rem 0 3rem 0;
   }
 
-  .row {
+  .detail-item {
     display: flex;
     gap: 0.8rem;
-    margin: 0.6rem 0;
+    margin: 1.2rem 0;
     align-items: flex-start;
   }
 
-  .row svg {
+  .detail-item svg {
     flex-shrink: 0;
     margin-top: 2px;
   }
 
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
   a.btn {
     display: inline-block;
-    margin: 1.5rem 0.8rem 0.5rem 0;
-    padding: 0.9rem 1.5rem;
+    padding: 1.1rem 2rem;
     background: var(--accent);
     color: white;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(255, 123, 0, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex: 1;
+    text-align: center;
+    min-width: 200px;
   }
 
   a.btn:hover {
     background: #e06e00;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 123, 0, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 123, 0, 0.5);
+  }
+
+  a.btn.calendar {
+    background: #4e8cff;
+    box-shadow: 0 6px 20px rgba(78, 140, 255, 0.4);
+  }
+
+  a.btn.calendar:hover {
+    background: #3d7ce6;
+    box-shadow: 0 10px 30px rgba(78, 140, 255, 0.5);
   }
 
   footer {
@@ -152,14 +168,23 @@
       font-size: 2.2rem;
     }
     
-    .card {
-      padding: 1.5rem;
+    .details {
+      margin: 1.5rem 0 2rem 0;
+    }
+    
+    .detail-item {
+      margin: 1rem 0;
+    }
+    
+    .button-group {
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2rem;
     }
     
     a.btn {
-      display: block;
-      text-align: center;
-      margin: 1rem 0 0.5rem 0;
+      min-width: unset;
+      flex: none;
     }
   }
 </style>
@@ -169,13 +194,10 @@
     <h1>Tumnus is turning&nbsp;3!</h1>
     <h2>Saturday • 20&nbsp;September • 9 – 11 AM</h2>
 
-    <div class="card">
+    <div class="details">
 
       <!--  Address  -->
-      <div class="row">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C8.13 2 5 5.13 ...Z" fill="#ff7b00" />
-        </svg>
+      <div class="detail-item">
         <div>
           <strong>Our house</strong><br />
           4232&nbsp;Overlook&nbsp;Dr
@@ -183,26 +205,35 @@
       </div>
 
       <!--  Gift note  -->
-      <div class="row" style="margin-top:0.8rem;">
+      <div class="detail-item">
         <span>🎁 No&nbsp;gifts please!</span>
       </div>
 
-      <!--  RSVP button  -->
+    </div>
+
+    <!--  Action buttons  -->
+    <div class="button-group">
       <a class="btn"
         href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
         target="_blank">
-        RSVP via Google&nbsp;Form
+        RSVP via Google Form
       </a>
 
-      <!--  Add-to-calendar button  -->
-      <a id="addCalBtn" class="btn" href="#" style="background:#4e8cff;">Add&nbsp;to&nbsp;Calendar</a>
+      <a id="addCalBtn" class="btn calendar" href="#">Add to Calendar</a>
+    </div>
 
-      <script>
-        const googleURL =
-          'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
+    <footer>
+      Questions? Text Kim & Scott
+    </footer>
+  </div>
+</div>
 
-        // ICS content generated dynamically - no separate file needed!
-        const icsContent = `BEGIN:VCALENDAR
+<script>
+  const googleURL =
+    'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
+
+  // ICS content generated dynamically - no separate file needed!
+  const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//jinglebiscuits//tumnus-bday//EN
 CALSCALE:GREGORIAN
@@ -218,32 +249,24 @@ LOCATION:4232 Overlook Drive South 35222
 END:VEVENT
 END:VCALENDAR`;
 
-        const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-        window.addEventListener('DOMContentLoaded', function () {
-          const btn = document.getElementById('addCalBtn');
-          if (!btn) return;
+  window.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('addCalBtn');
+    if (!btn) return;
 
-          if (isiOS) {
-            // Create data URL for iOS - bypasses server MIME type issues
-            const blob = new Blob([icsContent], { type: 'text/calendar' });
-            const dataURL = URL.createObjectURL(blob);
-            btn.href = dataURL;
-            btn.download = 'tumnus-bday.ics';
-            btn.target = '_blank';
-            btn.rel = 'noopener';
-          } else {
-            btn.href = googleURL;
-            btn.target = '_blank';
-            btn.rel = 'noopener';
-          }
-        });
-      </script>
-
-    </div>
-
-    <footer>
-      Questions? Text Kim & Scott
-    </footer>
-  </div>
-</div>
+    if (isiOS) {
+      // Create data URL for iOS - bypasses server MIME type issues
+      const blob = new Blob([icsContent], { type: 'text/calendar' });
+      const dataURL = URL.createObjectURL(blob);
+      btn.href = dataURL;
+      btn.download = 'tumnus-bday.ics';
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+    } else {
+      btn.href = googleURL;
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+    }
+  });
+</script>
