@@ -4,48 +4,103 @@
 <style>
   /* --- quick, mobile-first styling --- */
   :root {
-    --accent: #ff7b00;      /* button / highlight colour */
-    --text:   #333333;
-    --bg:     #fffdf7;
-    --card:   #ffffff;
+    --accent: #ff7b00;
+    /* button / highlight colour */
+    --text: #333333;
+    --bg: #fffdf7;
+    --card: #ffffff;
   }
+
   body {
-    margin:0; font-family: "Fredoka", sans-serif; background: var(--bg); color: var(--text);
-    display:flex; flex-direction:column; align-items:center; padding:0 1rem 4rem;
+    margin: 0;
+    font-family: "Fredoka", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 4rem;
   }
-  img.hero { width:100%; max-width:450px; border-radius:12px; margin:1.5rem 0; }
-  h1 { font-size:2.2rem; margin:0.5rem 0 0; text-align:center; }
-  h2 { font-size:1.2rem; font-weight:400; margin:0.3rem 0 1.4rem; text-align:center; }
+
+  img.hero {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin: 0.5rem 0 0;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0.3rem 0 1.4rem;
+    text-align: center;
+  }
+
   .card {
-    width:100%; max-width:480px; background:var(--card); border-radius:12px;
-    padding:1.4rem 1.6rem; box-shadow:0 4px 8px rgba(0,0,0,.07);
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .07);
   }
-  .row { display:flex; gap:0.7rem; margin:0.4rem 0; }
-  .row svg { flex-shrink:0; }
+
+  .row {
+    display: flex;
+    gap: 0.7rem;
+    margin: 0.4rem 0;
+  }
+
+  .row svg {
+    flex-shrink: 0;
+  }
+
   a.btn {
-    display:inline-block; margin-top:1.2rem; padding:0.75rem 1.2rem;
-    background:var(--accent); color:white; border-radius:8px; text-decoration:none;
-    font-weight:600; transition:background .2s;
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.75rem 1.2rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background .2s;
   }
-  a.btn:hover { background:#e06e00; }
-  footer { font-size:0.8rem; margin-top:2rem; opacity:.6; text-align:center; }
+
+  a.btn:hover {
+    background: #e06e00;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    opacity: .6;
+    text-align: center;
+  }
 </style>
 
 <!--  Top photo  -->
-<img src="https://www.cdc.gov/child-development/media/images/young-boy-smiling-with-grey-shirt.png" class="hero" alt="Tumnus smiling" />
+<img src="https://www.cdc.gov/child-development/media/images/young-boy-smiling-with-grey-shirt.png" class="hero"
+  alt="Tumnus smiling" />
 
 <h1>Tumnus is turning&nbsp;3!</h1>
-<h2>Saturday • 20&nbsp;August • 9 – 11 AM</h2>
+<h2>Saturday • 20&nbsp;September • 9 – 11 AM</h2>
 
 <div class="card">
 
   <!--  Address  -->
   <div class="row">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2C8.13 2 5 5.13 ...Z" fill="#ff7b00"/>
+      <path d="M12 2C8.13 2 5 5.13 ...Z" fill="#ff7b00" />
     </svg>
     <div>
-      <strong>Our house</strong><br/>
+      <strong>Our house</strong><br />
       999&nbsp;Overlook&nbsp;Dr
     </div>
   </div>
@@ -56,15 +111,57 @@
   </div>
 
   <!--  RSVP button  -->
-  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog" target="_blank">
+  <a class="btn"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
+    target="_blank">
     RSVP via Google&nbsp;Form
   </a>
 
   <!--  Add-to-calendar button  -->
-  <a class="btn" style="background:#4e8cff; margin-left:0.6rem;"
-     href="/files/tumnus-bday.ics" download>
-    Add&nbsp;to&nbsp;Calendar
-  </a>
+  <a id="addCalBtn" class="btn" href="#" style="background:#4e8cff; margin-left:.6rem;">Add&nbsp;to&nbsp;Calendar</a>
+
+  <script>
+    const googleURL =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
+
+    // ICS content generated dynamically - no separate file needed!
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//jinglebiscuits//tumnus-bday//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:tumnus-bday-20250920@jinglebiscuits
+DTSTAMP:20250923T120000Z
+DTSTART:20250920T090000
+DTEND:20250920T110000
+SUMMARY:Tumnus's 3rd Birthday Party
+DESCRIPTION:Join us to celebrate Tumnus turning 3! No gifts please!
+LOCATION:4232 Overlook Drive South 35222
+END:VEVENT
+END:VCALENDAR`;
+
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('addCalBtn');
+      if (!btn) return;
+
+      if (isiOS) {
+        // Create data URL for iOS - bypasses server MIME type issues
+        const blob = new Blob([icsContent], { type: 'text/calendar' });
+        const dataURL = URL.createObjectURL(blob);
+        btn.href = dataURL;
+        btn.download = 'tumnus-bday.ics';
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+      } else {
+        btn.href = googleURL;
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+      }
+    });
+  </script>
 
 </div>
 
