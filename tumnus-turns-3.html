@@ -1,7 +1,18 @@
-<!--  🎂  Tumnus's 3rd Birthday Invitation  🎂  -->
-<meta name="robots" content="noindex" />
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex" />
+  <title>Tumnus's 3rd Birthday Party</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!--  🎂  Tumnus's 3rd Birthday Invitation  🎂  -->
+  <style>
   /* --- Full-page background layout with left-positioned content --- */
   :root {
     --accent: #ff7b00;
@@ -160,34 +171,48 @@
     }
     
     .content-container {
-      background: var(--overlay);
+      /* Better gradient for mobile portrait mode - covers more of the screen */
+      background: linear-gradient(to right, var(--overlay) 0%, var(--overlay) 85%, rgba(255, 253, 247, 0.3) 100%);
       padding: 1.5rem 1rem;
     }
     
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.8rem; /* Increased from 2.2rem */
+    }
+    
+    h2 {
+      font-size: 1.5rem; /* Increased from 1.3rem base */
     }
     
     .details {
       margin: 1.5rem 0 2rem 0;
+      font-size: 1.1rem; /* Added larger text for details */
     }
     
     .detail-item {
-      margin: 1rem 0;
+      margin: 1.2rem 0; /* Slightly increased spacing */
     }
     
     .button-group {
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem; /* Increased from 0.8rem */
       margin-top: 2rem;
     }
     
     a.btn {
       min-width: unset;
       flex: none;
+      font-size: 1.1rem; /* Increased from 1rem */
+      padding: 1.2rem 2rem; /* Slightly more padding for easier tapping */
+    }
+    
+    footer {
+      font-size: 1rem; /* Increased from 0.85rem */
     }
   }
-</style>
+  </style>
+</head>
+<body>
 
 <div class="content-container">
   <div class="content">
@@ -270,3 +295,6 @@ END:VCALENDAR`;
     }
   });
 </script>
+
+</body>
+</html>
