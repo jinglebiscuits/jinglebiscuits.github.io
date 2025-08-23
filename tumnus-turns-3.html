@@ -131,6 +131,10 @@
     opacity: 0.7;
   }
 
+  .time-nowrap {
+    white-space: nowrap;
+  }
+
   /* Desktop: Position content on left 2/3 of screen */
   @media (min-width: 768px) {
     .content-container {
@@ -218,7 +222,7 @@
 <div class="content-container">
   <div class="content">
     <h1>Tumnus is turning&nbsp;3!</h1>
-    <h2>Saturday • 20&nbsp;September • 9 – 11 AM</h2>
+    <h2>Saturday • 20&nbsp;September • <span class="time-nowrap">9 – 11 AM</span></h2>
 
     <div class="details">
 
