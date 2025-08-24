@@ -221,55 +221,94 @@
 
 <div class="content-container">
   <div class="content">
-    <h1>Tumnus is turning&nbsp;3!</h1>
-    <h2>Saturday • 20&nbsp;September • <span class="time-nowrap">9 – 11 AM</span></h2>
+    <!-- Content will be populated by JavaScript based on URL parameter -->
+    <div id="invitation-content" style="display: none;">
+      <h1>Tumnus is turning&nbsp;3!</h1>
+      
+      <!-- Family Version -->
+      <div id="family-version">
+        <h2>Saturday • 20&nbsp;September • <span class="time-nowrap">9 – 11 AM</span></h2>
+        <div class="details">
+          <div class="detail-item">
+            <div>
+              <strong>Our house</strong><br />
+              4232&nbsp;Overlook&nbsp;Dr<br>
+              Birmingham, AL&nbsp;35222
+            </div>
+          </div>
+          <div class="detail-item">
+            <span>🎁 No&nbsp;gifts please!</span>
+          </div>
+          <div class="detail-item">
+            <span>🍰 We'll have coffee, brunch bites, and&nbsp;cake!</span>
+          </div>
+        </div>
+        <div class="button-group">
+          <a class="btn" id="family-rsvp"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
+            target="_blank">
+            📝 RSVP
+          </a>
+          <a id="family-calendar" class="btn calendar" href="#">📅 Calendar</a>
+        </div>
+        <footer>
+          Questions? Text Kim & Scott
+        </footer>
+      </div>
 
-    <div class="details">
+      <!-- Friends Version -->
+      <div id="friends-version">
+        <h2>Sunday • 21&nbsp;September • <span class="time-nowrap">9 – 11 AM</span></h2>
+        <div class="details">
+          <div class="detail-item">
+            <div>
+              <strong>Triangle Park</strong><br />
+              4341&nbsp;Clairmont&nbsp;Ave<br>
+              Birmingham, AL&nbsp;35222
+            </div>
+          </div>
+          <div class="detail-item">
+            <span>🎁 No&nbsp;gifts please!</span>
+          </div>
+          <div class="detail-item">
+            <span>🧁 We'll have coffee, brunch bites, and&nbsp;cupcakes!</span>
+          </div>
+        </div>
+        <div class="button-group">
+          <a class="btn" id="friends-rsvp"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeBDlunvYVMElj88h2OVptQs7voZ0EvliBm3r4edP13l2LgZg/viewform?usp=header"
+            target="_blank">
+            📝 RSVP
+          </a>
+          <a id="friends-calendar" class="btn calendar" href="#">📅 Calendar</a>
+        </div>
+        <footer>
+          Questions? Text Kim & Scott
+        </footer>
+      </div>
+    </div>
 
-      <!--  Address  -->
-      <div class="detail-item">
-        <div>
-          <strong>Our house</strong><br />
-          4232&nbsp;Overlook&nbsp;Dr<br>
-          Birmingham, AL&nbsp;35222
+    <!-- Error Message -->
+    <div id="error-content" style="display: none;">
+      <h1>🎉 Private Event</h1>
+      <h2>This invitation requires a valid access link.</h2>
+      <div class="details">
+        <div class="detail-item">
+          <span>Please check your invitation for the correct link, or contact the host if you need assistance.</span>
         </div>
       </div>
-
-      <!--  Gift note  -->
-      <div class="detail-item">
-        <span>🎁 No&nbsp;gifts please!</span>
-      </div>
-
-      <!--  Food & drinks  -->
-      <div class="detail-item">
-        <span>🍰 We'll have coffee, brunch bites, and&nbsp;cake!</span>
-      </div>
-
     </div>
-
-    <!--  Action buttons  -->
-    <div class="button-group">
-      <a class="btn"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSd5BeR93tjbGYHeBPGtbVmqPSx-5EmszHgR6y4slgH03Y4ODA/viewform?usp=dialog"
-        target="_blank">
-        📝 RSVP
-      </a>
-
-      <a id="addCalBtn" class="btn calendar" href="#">📅 Calendar</a>
-    </div>
-
-    <footer>
-      Questions? Text Kim & Scott
-    </footer>
   </div>
 </div>
 
 <script>
-  const googleURL =
-    'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago';
-
-  // ICS content generated dynamically - no separate file needed!
-  const icsContent = `BEGIN:VCALENDAR
+  // Configuration for different invitation versions
+  const inviteConfigs = {
+    home: {
+      // Family version
+      date: '20250920', // September 20, 2025
+      googleURL: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250920T090000/20250920T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=4232+Overlook+Drive+South+35222&ctz=America/Chicago',
+      icsContent: `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//jinglebiscuits//tumnus-bday//EN
 CALSCALE:GREGORIAN
@@ -283,26 +322,90 @@ SUMMARY:Tumnus's 3rd Birthday Party
 DESCRIPTION:Join us to celebrate Tumnus turning 3! No gifts please!
 LOCATION:4232 Overlook Drive South 35222
 END:VEVENT
-END:VCALENDAR`;
+END:VCALENDAR`
+    },
+    park: {
+      // Friends version
+      date: '20250921', // September 21, 2025
+      googleURL: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+3rd+Birthday+Party&dates=20250921T090000/20250921T110000&details=Join+us+to+celebrate+Tumnus+turning+3%21+No+gifts+please&location=Triangle+Park+4341+Clairmont+Ave+Birmingham+AL+35222&ctz=America/Chicago',
+      icsContent: `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//jinglebiscuits//tumnus-bday//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:tumnus-bday-20250921@jinglebiscuits
+DTSTAMP:20250923T120000Z
+DTSTART:20250921T090000
+DTEND:20250921T110000
+SUMMARY:Tumnus's 3rd Birthday Party
+DESCRIPTION:Join us to celebrate Tumnus turning 3! No gifts please!
+LOCATION:Triangle Park 4341 Clairmont Ave Birmingham AL 35222
+END:VEVENT
+END:VCALENDAR`
+    }
+  };
 
   const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  window.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('addCalBtn');
+  function getURLParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  function setupCalendarButton(buttonId, config) {
+    const btn = document.getElementById(buttonId);
     if (!btn) return;
 
     if (isiOS) {
       // Create data URL for iOS - bypasses server MIME type issues
-      const blob = new Blob([icsContent], { type: 'text/calendar' });
+      const blob = new Blob([config.icsContent], { type: 'text/calendar' });
       const dataURL = URL.createObjectURL(blob);
       btn.href = dataURL;
       btn.download = 'tumnus-bday.ics';
       btn.target = '_blank';
       btn.rel = 'noopener';
     } else {
-      btn.href = googleURL;
+      btn.href = config.googleURL;
       btn.target = '_blank';
       btn.rel = 'noopener';
+    }
+  }
+
+  function showInvitation(inviteType) {
+    // Hide error content
+    document.getElementById('error-content').style.display = 'none';
+    
+    // Show invitation content
+    document.getElementById('invitation-content').style.display = 'block';
+    
+    // Hide both versions initially
+    document.getElementById('family-version').style.display = 'none';
+    document.getElementById('friends-version').style.display = 'none';
+    
+    if (inviteType === 'home') {
+      // Show family version
+      document.getElementById('family-version').style.display = 'block';
+      setupCalendarButton('family-calendar', inviteConfigs.home);
+    } else if (inviteType === 'park') {
+      // Show friends version
+      document.getElementById('friends-version').style.display = 'block';
+      setupCalendarButton('friends-calendar', inviteConfigs.park);
+    }
+  }
+
+  function showError() {
+    document.getElementById('invitation-content').style.display = 'none';
+    document.getElementById('error-content').style.display = 'block';
+  }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    const inviteParam = getURLParameter('invite');
+    
+    if (inviteParam && inviteConfigs[inviteParam]) {
+      showInvitation(inviteParam);
+    } else {
+      showError();
     }
   });
 </script>
