@@ -327,7 +327,7 @@ LOCATION:4232 Overlook Dr Birmingham AL 35222
 END:VEVENT
 END:VCALENDAR`
     },
-    park: {
+    ymca: {
       // Friends version
       date: '20260920', // September 20, 2026
       googleURL: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tumnus%27s+4th+Birthday+Party&dates=20260920T130000/20260920T150000&details=Join+us+to+celebrate+Tumnus+turning+4%21+No+gifts+please&location=Hoover+YMCA+2250+AL-150+Hoover+AL+35244&ctz=America/Chicago',
@@ -390,10 +390,10 @@ END:VCALENDAR`
       // Show family version
       document.getElementById('family-version').style.display = 'block';
       setupCalendarButton('family-calendar', inviteConfigs.home);
-    } else if (inviteType === 'park') {
+    } else if (inviteType === 'ymca') {
       // Show friends version
       document.getElementById('friends-version').style.display = 'block';
-      setupCalendarButton('friends-calendar', inviteConfigs.park);
+      setupCalendarButton('friends-calendar', inviteConfigs.ymca);
     }
   }
 
