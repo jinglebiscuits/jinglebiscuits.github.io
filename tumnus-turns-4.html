@@ -109,6 +109,11 @@
     min-width: 200px;
   }
 
+  /* Keep a lone action the same width it would have beside a second button. */
+  .button-group.single-button a.btn {
+    flex: 0 1 calc((100% - 1rem) / 2);
+  }
+
   a.btn:hover {
     background: #e06e00;
     transform: translateY(-3px);
@@ -210,6 +215,10 @@
       font-size: 1rem; /* Reduced from 1.1rem */
       padding: 0.8rem 1.2rem; /* More compact padding */
     }
+
+    .button-group.single-button a.btn {
+      flex-basis: calc((100% - 0.8rem) / 2);
+    }
     
     footer {
       font-size: 1rem; /* Increased from 0.85rem */
@@ -274,7 +283,7 @@
             <span>🧁 We'll have coffee, brunch bites, and&nbsp;cupcakes!</span>
           </div>
         </div>
-        <div class="button-group">
+        <div class="button-group single-button">
           <a id="friends-calendar" class="btn calendar" href="#">📅 Calendar</a>
         </div>
         <footer>
